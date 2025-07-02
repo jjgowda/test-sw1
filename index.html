@@ -3,245 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartWorks Creations - Premium Digital Marketing Agency</title>
+    <title>SmartWork Creation And Solutions PVT LTD - Premium Digital Marketing Agency</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.emailjs.com/sdk/3.10.0/email.min.js"></script>
 </head>
 <body>
-    <!-- Loading Animation -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <span class="logo-text">SmartWorks</span>
-                <div class="loading-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Floating particles background -->
+    <div class="particles-bg" id="particles"></div>
+    
     <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <svg width="32" height="32" viewBox="0 0 32 32" class="nav-logo">
-                    <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <path d="M12 16l4 4 8-8" stroke="currentColor" stroke-width="2" fill="none"/>
-                </svg>
-                <span class="brand-text">SmartWorks</span>
-            </div>
-            <div class="nav-menu">
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#process" class="nav-link">Process</a>
-                <a href="#team" class="nav-link">Team</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"/>
-                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                    </svg>
-                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <h2>SmartWork Creation</h2>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#process">Process</a>
+                    <a href="#team">Team</a>
+                    <a href="#contact">Contact</a>
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-            <div class="floating-shape shape-3"></div>
-            <div class="floating-shape shape-4"></div>
-        </div>
+    <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="title-line">Transform Your Brand</span>
-                    <span class="title-line">Into Market</span>
-                    <span class="title-line highlight-text" id="typingText">Leadership</span>
+                    <span class="typing-text" id="typingText"></span>
+                    <span class="cursor">|</span>
                 </h1>
-                <p class="hero-description">
-                    Premium digital marketing agency creating exceptional results for forward-thinking businesses across India's competitive markets
-                </p>
-                <div class="hero-cta">
-                    <button class="btn btn--primary btn--lg cta-button">
-                        Start Your Journey
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </button>
+                <p class="hero-subtitle">Premium Digital Marketing Solutions That Drive Real Results</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn--primary btn--lg">Get Started</a>
+                    <a href="#services" class="btn btn--outline btn--lg">Our Services</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
+    <section id="services" class="services">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Services</h2>
-                <p class="section-description">Comprehensive digital solutions tailored for your success</p>
-            </div>
+            <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card" data-service="influencer">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- Influencer Marketing SVG -->
+                            <g class="network-nodes">
+                                <circle cx="100" cy="50" r="15" class="node main-node" />
+                                <circle cx="50" cy="100" r="10" class="node" />
+                                <circle cx="150" cy="100" r="10" class="node" />
+                                <circle cx="75" cy="150" r="8" class="node" />
+                                <circle cx="125" cy="150" r="8" class="node" />
+                                <line x1="100" y1="50" x2="50" y2="100" class="connection" />
+                                <line x1="100" y1="50" x2="150" y2="100" class="connection" />
+                                <line x1="50" y1="100" x2="75" y2="150" class="connection" />
+                                <line x1="150" y1="100" x2="125" y2="150" class="connection" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">Influencer Marketing</h3>
-                    <p class="service-description">Connect with India's top creators through authentic partnerships that drive real engagement</p>
+                    <h3>Influencer Marketing</h3>
+                    <p>Connect with India's leading content creators and micro-influencers. We leverage local cultural insights to create authentic partnerships that resonate with your audience.</p>
                 </div>
+
                 <div class="service-card" data-service="seo">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="M21 21l-4.35-4.35"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- SEO SVG -->
+                            <g class="seo-elements">
+                                <circle cx="80" cy="80" r="35" fill="none" stroke="currentColor" stroke-width="4" class="magnifying-circle" />
+                                <line x1="108" y1="108" x2="140" y2="140" stroke="currentColor" stroke-width="4" class="magnifying-handle" />
+                                <rect x="120" y="130" width="8" height="20" class="chart-bar bar1" />
+                                <rect x="130" y="120" width="8" height="30" class="chart-bar bar2" />
+                                <rect x="140" y="110" width="8" height="40" class="chart-bar bar3" />
+                                <path d="M160 100 L170 90 L180 100" fill="none" stroke="currentColor" stroke-width="2" class="arrow-up" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">SEO & Content</h3>
-                    <p class="service-description">Dominate Google India with content that ranks and converts your audience</p>
+                    <h3>SEO & Content</h3>
+                    <p>Dominate Google India with content tailored to your market. We understand Indian search behavior and craft content that ranks and converts.</p>
                 </div>
+
                 <div class="service-card" data-service="advertising">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3v18h18"/>
-                            <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- Strategic Advertising SVG -->
+                            <g class="advertising-elements">
+                                <rect x="50" y="150" width="20" height="30" class="ad-bar bar1" />
+                                <rect x="80" y="130" width="20" height="50" class="ad-bar bar2" />
+                                <rect x="110" y="110" width="20" height="70" class="ad-bar bar3" />
+                                <rect x="140" y="90" width="20" height="90" class="ad-bar bar4" />
+                                <circle cx="100" cy="60" r="20" fill="none" stroke="currentColor" stroke-width="3" class="target-outer" />
+                                <circle cx="100" cy="60" r="10" fill="currentColor" class="target-inner" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">Strategic Advertising</h3>
-                    <p class="service-description">Data-driven ad campaigns that maximize ROI across all digital platforms</p>
+                    <h3>Strategic Advertising</h3>
+                    <p>Run high-impact ad campaigns across Google, Facebook, Instagram, and emerging Indian platforms. Our data-driven approach ensures every rupee delivers results.</p>
                 </div>
+
                 <div class="service-card" data-service="social">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- Social Media SVG -->
+                            <g class="social-elements">
+                                <rect x="70" y="70" width="60" height="60" rx="10" class="social-phone" />
+                                <circle cx="100" cy="100" r="8" class="social-icon" />
+                                <circle cx="100" cy="100" r="15" fill="none" stroke="currentColor" stroke-width="2" class="ripple ripple1" />
+                                <circle cx="100" cy="100" r="25" fill="none" stroke="currentColor" stroke-width="2" class="ripple ripple2" />
+                                <circle cx="100" cy="100" r="35" fill="none" stroke="currentColor" stroke-width="2" class="ripple ripple3" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">Social Media</h3>
-                    <p class="service-description">Build thriving communities on platforms where your audience spends time</p>
+                    <h3>Social Media</h3>
+                    <p>Build thriving communities on platforms where Indians spend their time. From Instagram Stories to LinkedIn articles, we create engaging content that grows your brand.</p>
                 </div>
+
                 <div class="service-card" data-service="email">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- Email Marketing SVG -->
+                            <g class="email-elements">
+                                <rect x="60" y="80" width="80" height="60" rx="5" class="envelope-body" />
+                                <path d="M60 80 L100 110 L140 80" class="envelope-flap" />
+                                <circle cx="120" cy="70" r="3" class="floating-element elem1" />
+                                <circle cx="140" cy="60" r="2" class="floating-element elem2" />
+                                <circle cx="80" cy="65" r="2.5" class="floating-element elem3" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">Email Marketing</h3>
-                    <p class="service-description">Automated email campaigns that nurture leads and drive repeat business</p>
+                    <h3>Email Marketing</h3>
+                    <p>Build lasting customer relationships with personalized email campaigns and automation workflows that nurture leads and drive repeat business.</p>
                 </div>
+
                 <div class="service-card" data-service="analytics">
                     <div class="service-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
-                            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                        <svg class="animated-svg" viewBox="0 0 200 200">
+                            <!-- Analytics SVG -->
+                            <g class="analytics-elements">
+                                <rect x="40" y="40" width="120" height="80" rx="8" class="dashboard" />
+                                <rect x="50" y="60" width="30" height="20" rx="2" class="widget" />
+                                <rect x="90" y="60" width="30" height="20" rx="2" class="widget" />
+                                <rect x="130" y="60" width="30" height="20" rx="2" class="widget" />
+                                <path d="M50 100 L70 90 L90 95 L110 85 L130 80" class="chart-line" />
+                                <circle cx="70" cy="90" r="2" class="data-point" />
+                                <circle cx="90" cy="95" r="2" class="data-point" />
+                                <circle cx="110" cy="85" r="2" class="data-point" />
+                                <circle cx="130" cy="80" r="2" class="data-point" />
+                            </g>
                         </svg>
                     </div>
-                    <h3 class="service-title">Analytics & Optimization</h3>
-                    <p class="service-description">Transform data into actionable insights for continuous growth</p>
+                    <h3>Analytics & Optimization</h3>
+                    <p>Transform data into actionable insights. We track what matters and optimize for maximum ROI, ensuring your marketing investment delivers measurable growth.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Process Section -->
-    <section class="process" id="process">
+    <section id="process" class="process">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Process</h2>
-                <p class="section-description">Six proven steps to digital marketing excellence</p>
-            </div>
+            <h2 class="section-title">Our Process</h2>
             <div class="process-timeline">
-                <div class="timeline-line" id="timelineLine"></div>
+                <div class="timeline-line"></div>
                 <div class="process-step" data-step="1">
-                    <div class="step-number">
-                        <span>1</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">1</div>
                     <div class="step-content">
-                        <h3 class="step-title">Research & Strategy</h3>
-                        <p class="step-description">Deep market analysis and competitor research to understand your unique position</p>
+                        <h3>Research & Strategy</h3>
+                        <p>We dive deep into your business, analyze your market, study competitors, and understand your unique value proposition.</p>
                     </div>
                 </div>
                 <div class="process-step" data-step="2">
-                    <div class="step-number">
-                        <span>2</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">2</div>
                     <div class="step-content">
-                        <h3 class="step-title">Planning & Design</h3>
-                        <p class="step-description">Comprehensive strategy with clear objectives and measurable KPIs</p>
+                        <h3>Planning & Design</h3>
+                        <p>Based on our research, we craft a comprehensive digital marketing strategy with clear objectives, target audience insights, and measurable KPIs.</p>
                     </div>
                 </div>
                 <div class="process-step" data-step="3">
-                    <div class="step-number">
-                        <span>3</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">3</div>
                     <div class="step-content">
-                        <h3 class="step-title">Content Creation</h3>
-                        <p class="step-description">Compelling content and engaging visuals that resonate with your audience</p>
+                        <h3>Content Creation</h3>
+                        <p>Our team brings the strategy to life with compelling content, engaging visuals, and campaigns that drive action.</p>
                     </div>
                 </div>
                 <div class="process-step" data-step="4">
-                    <div class="step-number">
-                        <span>4</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">4</div>
                     <div class="step-content">
-                        <h3 class="step-title">Campaign Launch</h3>
-                        <p class="step-description">Precision execution with real-time monitoring and optimization</p>
+                        <h3>Campaign Launch</h3>
+                        <p>We launch campaigns with precision monitoring, continuous A/B testing, and real-time optimization for maximum performance.</p>
                     </div>
                 </div>
                 <div class="process-step" data-step="5">
-                    <div class="step-number">
-                        <span>5</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">5</div>
                     <div class="step-content">
-                        <h3 class="step-title">Performance Analysis</h3>
-                        <p class="step-description">Continuous A/B testing and data-driven performance improvements</p>
+                        <h3>Optimization</h3>
+                        <p>Through detailed analytics, we identify what works best and scale successful strategies while refining underperforming areas.</p>
                     </div>
                 </div>
                 <div class="process-step" data-step="6">
-                    <div class="step-number">
-                        <span>6</span>
-                        <div class="step-particles">
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                            <div class="particle"></div>
-                        </div>
-                    </div>
+                    <div class="step-number">6</div>
                     <div class="step-content">
-                        <h3 class="step-title">Scale & Grow</h3>
-                        <p class="step-description">Sustainable growth systems for long-term market leadership</p>
+                        <h3>Scale & Grow</h3>
+                        <p>We build sustainable growth systems that deliver results and establish your brand as a leader in your industry.</p>
                     </div>
                 </div>
             </div>
@@ -249,46 +234,102 @@
     </section>
 
     <!-- Team Section -->
-    <section class="team" id="team">
+    <section id="team" class="team">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Meet Our Team</h2>
-                <p class="section-description">Passionate experts dedicated to your success</p>
-            </div>
+            <h2 class="section-title">Our Team</h2>
             <div class="team-grid">
-                <div class="team-card" data-member="arjun">
-                    <div class="team-avatar">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Arjun Kumar" loading="lazy">
-                        <div class="avatar-border"></div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <div class="photo-placeholder">AK</div>
                     </div>
-                    <div class="team-info">
-                        <h3 class="team-name">Arjun Kumar</h3>
-                        <p class="team-role">Founder & Strategic Director</p>
-                        <p class="team-description">8+ years scaling businesses from MVP to market leaders</p>
+                    <h3>Arjun Kumar</h3>
+                    <p class="member-role">Founder & Strategic Director</p>
+                    <p>Former marketing lead at a top Indian unicorn startup, Arjun brings 8+ years of experience in scaling businesses from MVP to market leaders.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <div class="photo-placeholder">PS</div>
+                    </div>
+                    <h3>Priya Sharma</h3>
+                    <p class="member-role">Creative Director</p>
+                    <p>Priya, an award-winning creative professional, specializes in building compelling brand narratives and culturally relevant content.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-photo">
+                        <div class="photo-placeholder">RS</div>
+                    </div>
+                    <h3>Rahul Singh</h3>
+                    <p class="member-role">Performance Marketing Lead</p>
+                    <p>Rahul, a data-driven marketer, turns insights into revenue with expertise in PPC, analytics, and conversion optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Start Your Journey</h3>
+                    <p>Ready to transform your digital presence? Get in touch with us today.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <strong>Email:</strong> info@smartworkcreation.in
+                        </div>
+                        <div class="contact-item">
+                            <strong>Phone:</strong> +91 9738975669
+                        </div>
+                        <div class="contact-item">
+                            <strong>Address:</strong> 3rd floor 9th main 41st Cross Rd 4th Block Rajajinagar Bengaluru 560010
+                        </div>
                     </div>
                 </div>
-                <div class="team-card" data-member="priya">
-                    <div class="team-avatar">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b332c5a4?w=150&h=150&fit=crop&crop=face" alt="Priya Sharma" loading="lazy">
-                        <div class="avatar-border"></div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                            <div class="error-message"></div>
+                        </div>
                     </div>
-                    <div class="team-info">
-                        <h3 class="team-name">Priya Sharma</h3>
-                        <p class="team-role">Creative Director</p>
-                        <p class="team-description">Award-winning creative professional and brand strategist</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="company">Company</label>
+                            <input type="text" id="company" name="company" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="team-card" data-member="rahul">
-                    <div class="team-avatar">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Rahul Singh" loading="lazy">
-                        <div class="avatar-border"></div>
+                    <div class="form-group">
+                        <label class="form-label" for="service">Service Interest</label>
+                        <select id="service" name="service" class="form-control">
+                            <option value="">Select a service</option>
+                            <option value="influencer-marketing">Influencer Marketing</option>
+                            <option value="seo-content">SEO & Content</option>
+                            <option value="strategic-advertising">Strategic Advertising</option>
+                            <option value="social-media">Social Media</option>
+                            <option value="email-marketing">Email Marketing</option>
+                            <option value="analytics">Analytics & Optimization</option>
+                            <option value="complete-package">Complete Package</option>
+                        </select>
                     </div>
-                    <div class="team-info">
-                        <h3 class="team-name">Rahul Singh</h3>
-                        <p class="team-role">Performance Marketing Lead</p>
-                        <p class="team-description">Data-driven marketer with PPC and analytics expertise</p>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                        <div class="error-message"></div>
                     </div>
-                </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
             </div>
         </div>
     </section>
@@ -297,47 +338,127 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>SmartWorks Creations</h3>
-                    <p>Transforming businesses through premium digital marketing solutions.</p>
+                <div class="footer-section">
+                    <h3>SmartWork Creation</h3>
+                    <p>Premium Digital Marketing Solutions That Drive Real Results</p>
                 </div>
-                <div class="footer-contact">
-                    <button class="btn btn--primary contact-btn" id="contactBtn">
-                        Get Started Today
-                    </button>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy-policy" id="privacyLink">Privacy Policy</a></li>
+                        <li><a href="#terms-conditions" id="termsLink">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>info@smartworkcreation.in</p>
+                    <p>+91 9738975669</p>
+                    <p>3rd floor 9th main 41st Cross Rd 4th Block Rajajinagar Bengaluru 560010</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 SmartWorks Creations. All rights reserved.</p>
+                <p>&copy; 2025 SmartWork Creation And Solutions PVT LTD. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Popup -->
-    <div class="whatsapp-popup" id="whatsappPopup">
-        <div class="popup-content">
-            <button class="popup-close" id="popupClose">&times;</button>
-            <div class="popup-header">
-                <div class="whatsapp-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.93 3.516z"/>
-                    </svg>
-                </div>
-                <div class="popup-title">
-                    <h4>Let's Chat on WhatsApp!</h4>
-                    <p>Ready to transform your business?</p>
-                </div>
+    <!-- Privacy Policy Modal -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <button class="modal-close" id="privacyClose">&times;</button>
             </div>
-            <div class="popup-body">
-                <p>Click below to start a conversation with our team. We're here to help you achieve your digital marketing goals.</p>
-                <a href="https://wa.me/919876543210?text=Hi%20SmartWorks%20Creations!%20I'm%20interested%20in%20your%20digital%20marketing%20services." target="_blank" class="btn btn--primary btn--full-width whatsapp-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.93 3.516z"/>
-                    </svg>
-                    Chat on WhatsApp
-                </a>
+            <div class="modal-body">
+                <h3>1. Information We Collect</h3>
+                <p>We collect information you provide directly to us, such as when you fill out a contact form, subscribe to our newsletter, or communicate with us. This may include your name, email address, phone number, company name, and any other information you choose to provide.</p>
+
+                <h3>2. How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide, maintain, and improve our services</li>
+                    <li>Respond to your inquiries and fulfill your requests</li>
+                    <li>Send you marketing communications (with your consent)</li>
+                    <li>Analyze usage patterns and improve our website</li>
+                </ul>
+
+                <h3>3. Information Sharing and Disclosure</h3>
+                <p>We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in this privacy policy. We may share your information with trusted service providers who assist us in operating our website and conducting our business.</p>
+
+                <h3>4. Data Security</h3>
+                <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure.</p>
+
+                <h3>5. Cookies and Tracking Technologies</h3>
+                <p>We use cookies and similar tracking technologies to enhance your browsing experience, analyze website traffic, and understand where our visitors are coming from.</p>
+
+                <h3>6. Your Rights</h3>
+                <p>You have the right to access, update, or delete your personal information. You may also opt out of receiving marketing communications from us at any time.</p>
+
+                <h3>7. Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at info@smartworkcreation.in</p>
             </div>
         </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms & Conditions</h2>
+                <button class="modal-close" id="termsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing and using the services provided by SmartWork Creation And Solutions PVT LTD, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                <h3>2. Services</h3>
+                <p>SmartWork Creation And Solutions PVT LTD provides digital marketing services including but not limited to influencer marketing, SEO, content creation, social media management, advertising, email marketing, and analytics.</p>
+
+                <h3>3. User Responsibilities</h3>
+                <p>You agree to:</p>
+                <ul>
+                    <li>Provide accurate and complete information</li>
+                    <li>Maintain the confidentiality of any account credentials</li>
+                    <li>Use our services in compliance with applicable laws</li>
+                    <li>Not interfere with or disrupt our services</li>
+                </ul>
+
+                <h3>4. Payment Terms</h3>
+                <p>Payment terms will be specified in individual service agreements. All fees are non-refundable unless otherwise specified in writing.</p>
+
+                <h3>5. Intellectual Property</h3>
+                <p>All content, trademarks, and intellectual property on this website are owned by SmartWork Creation And Solutions PVT LTD or our licensors.</p>
+
+                <h3>6. Limitation of Liability</h3>
+                <p>SmartWork Creation And Solutions PVT LTD shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services.</p>
+
+                <h3>7. Governing Law</h3>
+                <p>These terms shall be governed by and construed in accordance with the laws of India, and any disputes shall be subject to the jurisdiction of the courts in Bengaluru, Karnataka.</p>
+
+                <h3>8. Contact Information</h3>
+                <p>For questions regarding these terms, please contact us at info@smartworkcreation.in</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Popup -->
+    <div class="whatsapp-popup" id="whatsappPopup">
+        <a href="https://wa.me/919738975669" target="_blank" class="whatsapp-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.89 3.097"/>
+            </svg>
+            <span>Chat with us</span>
+        </a>
     </div>
 
     <script src="app.js"></script>
