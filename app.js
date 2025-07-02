@@ -1,686 +1,525 @@
-// SmartWorks Creations - Premium Digital Marketing Agency
-// Enhanced JavaScript with Process Animation Improvements - Fixed Version
+// SmartWork Creation And Solutions PVT LTD - Main JavaScript
 
-class SmartWorksApp {
-    constructor() {
-        this.isLoaded = false;
-        this.currentTheme = this.getStoredTheme();
-        this.scrollProgress = 0;
-        this.processSteps = [];
-        this.serviceCards = [];
-        this.teamCards = [];
-        this.timelineAnimated = false;
+// Initialize EmailJS
+(function() {
+    emailjs.init("YOUR_PUBLIC_KEY"); // This would need to be replaced with actual EmailJS public key
+})();
+
+// DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeApp();
+});
+
+function initializeApp() {
+    initThemeToggle();
+    initMobileMenu();
+    initParticleSystem();
+    initScrollAnimations();
+    initContactForm();
+    initModals();
+    initSmoothScrolling();
+    initWhatsAppPopup();
+    
+    // Initialize typing animation after a short delay to ensure DOM is ready
+    setTimeout(() => {
+        initTypingAnimation();
+    }, 500);
+}
+
+// Theme Toggle Functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    // Set initial theme
+    document.documentElement.setAttribute('data-color-scheme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-color-scheme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
-        this.init();
+        document.documentElement.setAttribute('data-color-scheme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+}
+
+function updateThemeIcon(theme) {
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+// Mobile Menu Functionality
+function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileMenuBtn.addEventListener('click', function() {
+        mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+        this.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking on a link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.style.display = 'none';
+            mobileMenuBtn.classList.remove('active');
+        });
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.style.display = 'none';
+            mobileMenuBtn.classList.remove('active');
+        }
+    });
+}
+
+// Typing Animation - Fixed implementation
+function initTypingAnimation() {
+    const typingText = document.getElementById('typingText');
+    
+    if (!typingText) {
+        console.error('Typing text element not found');
+        return;
     }
-
-    init() {
-        this.initializeElements();
-        this.setupEventListeners();
-        this.initializeTheme();
-        this.startLoadingSequence();
-        this.initializeAnimations();
-        this.setupIntersectionObserver();
-        this.initializeProcessTimeline();
-    }
-
-    initializeElements() {
-        // Loading screen
-        this.loadingScreen = document.getElementById('loadingScreen');
-        
-        // Navigation
-        this.navbar = document.getElementById('navbar');
-        this.themeToggle = document.getElementById('themeToggle');
-        
-        // Hero section
-        this.typingText = document.getElementById('typingText');
-        
-        // Process section
-        this.timelineLine = document.getElementById('timelineLine');
-        this.processSteps = document.querySelectorAll('.process-step');
-        
-        // Service and team cards
-        this.serviceCards = document.querySelectorAll('.service-card');
-        this.teamCards = document.querySelectorAll('.team-card');
-        
-        // WhatsApp popup
-        this.contactBtn = document.getElementById('contactBtn');
-        this.whatsappPopup = document.getElementById('whatsappPopup');
-        this.popupClose = document.getElementById('popupClose');
-        
-        // All contact buttons
-        this.contactButtons = document.querySelectorAll('.contact-btn, .cta-button, #contactBtn');
-    }
-
-    setupEventListeners() {
-        // Theme toggle
-        if (this.themeToggle) {
-            this.themeToggle.addEventListener('click', () => this.toggleTheme());
+    
+    const texts = [
+        'Elevate Your Brand',
+        'Drive Real Results', 
+        'Scale Your Business',
+        'Transform Digitally'
+    ];
+    
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isWaiting = false;
+    
+    function typeText() {
+        if (isWaiting) {
+            isWaiting = false;
+            setTimeout(typeText, 500);
+            return;
         }
         
-        // Scroll events with throttling for better performance
-        window.addEventListener('scroll', this.throttle(() => this.handleScroll(), 16), { passive: true });
+        const currentText = texts[textIndex];
         
-        // Navigation links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => this.handleNavClick(e));
+        if (isDeleting) {
+            typingText.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            isWaiting = true;
+            typeSpeed = 500; // Pause before next text
+        }
+        
+        setTimeout(typeText, typeSpeed);
+    }
+    
+    // Start the animation
+    typeText();
+}
+
+// Particle System
+function initParticleSystem() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+    
+    for (let i = 0; i < particleCount; i++) {
+        createParticle();
+    }
+    
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random size between 2-6px
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // Random position
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        
+        // Random animation duration
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// Scroll Animations with Intersection Observer
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.service-card, .team-member, .process-step');
+    animatedElements.forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+    
+    // Service card hover animations
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) rotateX(5deg) scale(1.02)';
         });
         
-        // WhatsApp popup - Multiple contact buttons
-        this.contactButtons.forEach(btn => {
-            if (btn) {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showWhatsAppPopup();
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotateX(0) scale(1)';
+        });
+    });
+}
+
+// Contact Form Functionality
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    
+    if (!contactForm) return;
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            submitForm();
+        }
+    });
+    
+    // Real-time validation
+    const formInputs = contactForm.querySelectorAll('input, textarea, select');
+    formInputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            validateField(this);
+        });
+        
+        input.addEventListener('input', function() {
+            clearError(this);
+        });
+    });
+    
+    function validateForm() {
+        let isValid = true;
+        const requiredFields = contactForm.querySelectorAll('[required]');
+        
+        requiredFields.forEach(field => {
+            if (!validateField(field)) {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    function validateField(field) {
+        const value = field.value.trim();
+        const errorElement = field.parentNode.querySelector('.error-message');
+        
+        // Clear previous errors
+        clearError(field);
+        
+        if (field.hasAttribute('required') && !value) {
+            showError(field, 'This field is required');
+            return false;
+        }
+        
+        if (field.type === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                showError(field, 'Please enter a valid email address');
+                return false;
+            }
+        }
+        
+        if (field.type === 'tel' && value) {
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            if (!phoneRegex.test(value)) {
+                showError(field, 'Please enter a valid phone number');
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    function showError(field, message) {
+        const errorElement = field.parentNode.querySelector('.error-message');
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        field.style.borderColor = 'var(--color-error)';
+    }
+    
+    function clearError(field) {
+        const errorElement = field.parentNode.querySelector('.error-message');
+        if (errorElement) {
+            errorElement.style.display = 'none';
+        }
+        field.style.borderColor = '';
+    }
+    
+    function submitForm() {
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        
+        // Show loading state
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        // Collect form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            company: document.getElementById('company').value,
+            service: document.getElementById('service').value,
+            message: document.getElementById('message').value
+        };
+        
+        // Simulate email sending to info@smartworkcreation.in
+        // In a real implementation, you would integrate with EmailJS or a backend service
+        setTimeout(() => {
+            // Simulate successful email sending
+            showFormStatus('success', 'Thank you! Your message has been sent to info@smartworkcreation.in. We\'ll get back to you soon.');
+            contactForm.reset();
+            
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 2000);
+    }
+    
+    function showFormStatus(type, message) {
+        formStatus.className = `form-status ${type}`;
+        formStatus.textContent = message;
+        formStatus.style.display = 'block';
+        
+        // Hide status after 5 seconds
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 5000);
+    }
+}
+
+// Modal Functionality
+function initModals() {
+    const privacyLink = document.getElementById('privacyLink');
+    const termsLink = document.getElementById('termsLink');
+    const privacyModal = document.getElementById('privacyModal');
+    const termsModal = document.getElementById('termsModal');
+    const privacyClose = document.getElementById('privacyClose');
+    const termsClose = document.getElementById('termsClose');
+    
+    if (privacyLink && privacyModal) {
+        privacyLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            privacyModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (termsLink && termsModal) {
+        termsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            termsModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    if (privacyClose && privacyModal) {
+        privacyClose.addEventListener('click', function() {
+            privacyModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    if (termsClose && termsModal) {
+        termsClose.addEventListener('click', function() {
+            termsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+    }
+    
+    // Close modals when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target === privacyModal) {
+            privacyModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        if (e.target === termsModal) {
+            termsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Close modals with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (privacyModal) privacyModal.style.display = 'none';
+            if (termsModal) termsModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
+// Smooth Scrolling Navigation
+function initSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
                 });
             }
         });
-        
-        if (this.popupClose) {
-            this.popupClose.addEventListener('click', () => this.hideWhatsAppPopup());
-        }
-        
-        // Close popup when clicking outside
-        if (this.whatsappPopup) {
-            document.addEventListener('click', (e) => {
-                if (this.whatsappPopup.classList.contains('show') && 
-                    !this.whatsappPopup.contains(e.target) && 
-                    !Array.from(this.contactButtons).includes(e.target)) {
-                    this.hideWhatsAppPopup();
-                }
-            });
-        }
-        
-        // Resize handler
-        window.addEventListener('resize', this.throttle(() => this.handleResize(), 100), { passive: true });
-        
-        // Reduced motion check
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            this.disableAnimations();
-        }
-    }
-
-    // Theme Management
-    getStoredTheme() {
-        if (typeof localStorage !== 'undefined') {
-            try {
-                return localStorage.getItem('theme') || 'light';
-            } catch (e) {
-                return 'light';
-            }
-        }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    initializeTheme() {
-        document.documentElement.setAttribute('data-color-scheme', this.currentTheme);
-    }
-
-    toggleTheme() {
-        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-color-scheme', this.currentTheme);
-        
-        if (typeof localStorage !== 'undefined') {
-            try {
-                localStorage.setItem('theme', this.currentTheme);
-            } catch (e) {
-                console.warn('Could not save theme preference');
-            }
-        }
-        
-        // Add smooth transition effect
-        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
-        setTimeout(() => {
-            document.body.style.transition = '';
-        }, 300);
-    }
-
-    // Loading Animation
-    startLoadingSequence() {
-        // Simulate loading time
-        setTimeout(() => {
-            this.finishLoading();
-        }, 1500);
-    }
-
-    finishLoading() {
-        if (this.loadingScreen) {
-            this.loadingScreen.classList.add('hidden');
-        }
-        this.isLoaded = true;
-        
-        // Start hero animations
-        setTimeout(() => {
-            this.startHeroAnimations();
-        }, 300);
-        
-        // Remove loading screen from DOM after animation
-        setTimeout(() => {
-            if (this.loadingScreen) {
-                this.loadingScreen.remove();
-            }
-        }, 800);
-    }
-
-    // Hero Animations
-    startHeroAnimations() {
-        // Start typing animation
-        this.startTypingAnimation();
-        
-        // Animate floating shapes
-        this.animateFloatingShapes();
-    }
-
-    startTypingAnimation() {
-        if (!this.typingText) return;
-        
-        const words = ['Leadership', 'Excellence', 'Innovation', 'Success'];
-        let currentWordIndex = 0;
-        let currentCharIndex = 0;
-        let isDeleting = false;
-        
-        const typeSpeed = 150;
-        const deleteSpeed = 100;
-        const pauseTime = 2000;
-        
-        const typeWriter = () => {
-            const currentWord = words[currentWordIndex];
-            
-            if (isDeleting) {
-                this.typingText.textContent = currentWord.substring(0, currentCharIndex - 1);
-                currentCharIndex--;
-                
-                if (currentCharIndex === 0) {
-                    isDeleting = false;
-                    currentWordIndex = (currentWordIndex + 1) % words.length;
-                    setTimeout(typeWriter, 500);
-                    return;
-                }
+    });
+    
+    // Update navbar on scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = 'var(--shadow-sm)';
             } else {
-                this.typingText.textContent = currentWord.substring(0, currentCharIndex + 1);
-                currentCharIndex++;
-                
-                if (currentCharIndex === currentWord.length) {
-                    isDeleting = true;
-                    setTimeout(typeWriter, pauseTime);
-                    return;
-                }
-            }
-            
-            setTimeout(typeWriter, isDeleting ? deleteSpeed : typeSpeed);
-        };
-        
-        // Add cursor effect
-        this.typingText.style.borderRight = '3px solid #FFD700';
-        this.typingText.style.animation = 'blink 1s infinite';
-        
-        // Add keyframes for cursor blink
-        if (!document.querySelector('#cursor-blink-style')) {
-            const style = document.createElement('style');
-            style.id = 'cursor-blink-style';
-            style.textContent = `
-                @keyframes blink {
-                    0%, 50% { border-color: #FFD700; }
-                    51%, 100% { border-color: transparent; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        typeWriter();
-    }
-
-    animateFloatingShapes() {
-        const shapes = document.querySelectorAll('.floating-shape');
-        shapes.forEach((shape, index) => {
-            shape.style.animationDelay = `${index * 0.5}s`;
-            shape.style.opacity = '0.1';
-        });
-    }
-
-    // Scroll Handling - Fixed
-    handleScroll() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        this.scrollProgress = Math.min(scrollTop / docHeight, 1);
-        
-        this.updateNavbar(scrollTop);
-        this.updateProcessTimeline();
-        this.handleParallax();
-    }
-
-    updateNavbar(scrollTop) {
-        if (this.navbar) {
-            if (scrollTop > 100) {
-                this.navbar.classList.add('scrolled');
-            } else {
-                this.navbar.classList.remove('scrolled');
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
             }
         }
-    }
+    });
+}
 
-    // Process Timeline Animation - Fixed Implementation
-    initializeProcessTimeline() {
-        this.processSteps.forEach((step, index) => {
-            step.style.animationDelay = `${index * 0.2}s`;
-            
-            // Add hover effects to each step
-            this.addProcessStepHoverEffects(step);
-        });
-    }
-
-    updateProcessTimeline() {
-        if (!this.timelineLine) return;
-        
-        const processSection = document.querySelector('.process');
-        if (!processSection) return;
-        
-        const rect = processSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        // Calculate if section is in view
-        const sectionTop = rect.top;
-        const sectionHeight = rect.height;
-        const sectionBottom = sectionTop + sectionHeight;
-        
-        let progress = 0;
-        
-        if (sectionTop < windowHeight && sectionBottom > 0) {
-            // Section is in viewport
-            const visibleTop = Math.max(0, -sectionTop);
-            const visibleBottom = Math.min(sectionHeight, windowHeight - sectionTop);
-            const visibleHeight = visibleBottom - visibleTop;
-            
-            if (visibleHeight > 0) {
-                progress = Math.min(visibleHeight / (sectionHeight * 0.8), 1);
-            }
-        }
-        
-        // Update timeline line height with smooth animation
-        const maxHeight = this.calculateTimelineHeight();
-        const targetHeight = Math.max(0, progress * maxHeight);
-        
-        this.timelineLine.style.height = `${targetHeight}px`;
-        
-        // Add glow effect when timeline is active
-        if (progress > 0) {
-            this.timelineLine.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.3)';
-            this.timelineLine.style.background = 'linear-gradient(to bottom, #FFD700, #FFA500)';
-        } else {
-            this.timelineLine.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.3)';
-        }
-        
-        // Animate process steps based on timeline progress
-        this.animateProcessStepsOnScroll(progress);
-    }
-
-    calculateTimelineHeight() {
-        const processContainer = document.querySelector('.process-timeline');
-        if (!processContainer) return 600;
-        
-        let totalHeight = 0;
-        this.processSteps.forEach(step => {
-            totalHeight += step.offsetHeight + 32; // 32px margin
-        });
-        
-        return Math.max(totalHeight - 100, 400);
-    }
-
-    animateProcessStepsOnScroll(progress) {
-        const stepCount = this.processSteps.length;
-        const progressPerStep = 1 / stepCount;
-        
-        this.processSteps.forEach((step, index) => {
-            const stepProgress = (progress - (index * progressPerStep)) / progressPerStep;
-            
-            if (stepProgress > 0 && !step.classList.contains('animate')) {
-                // Trigger step animation
-                setTimeout(() => {
-                    step.classList.add('animate');
-                    this.activateStepParticles(step);
-                }, index * 150);
-            }
-        });
-    }
-
-    activateStepParticles(step) {
-        const particles = step.querySelectorAll('.particle');
-        particles.forEach((particle, index) => {
-            setTimeout(() => {
-                particle.style.animation = `particleFloat 3s ease-in-out infinite ${index * 0.5}s`;
-            }, index * 200);
-        });
-        
-        // Add step number pulsing
-        const stepNumber = step.querySelector('.step-number');
-        if (stepNumber) {
-            stepNumber.style.animation = 'stepPulse 2s ease-in-out infinite';
-        }
-    }
-
-    addProcessStepHoverEffects(step) {
-        const stepContent = step.querySelector('.step-content');
-        const stepNumber = step.querySelector('.step-number');
-        
-        if (stepContent && stepNumber) {
-            step.addEventListener('mouseenter', () => {
-                stepContent.style.transform = 'translateY(-8px) rotate(1deg)';
-                stepContent.style.boxShadow = '0 12px 30px rgba(255, 215, 0, 0.2)';
-                stepContent.style.borderColor = '#FFD700';
-                
-                stepNumber.style.transform = 'scale(1.1)';
-                stepNumber.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.8)';
-                
-                // Add extra particles on hover
-                this.createHoverParticles(step);
-            });
-            
-            step.addEventListener('mouseleave', () => {
-                stepContent.style.transform = '';
-                stepContent.style.boxShadow = '';
-                stepContent.style.borderColor = '';
-                
-                stepNumber.style.transform = '';
-                stepNumber.style.boxShadow = '';
-            });
-        }
-    }
-
-    createHoverParticles(step) {
-        const particleCount = 3;
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                background: #FFD700;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 100;
-            `;
-            
-            step.appendChild(particle);
-            
-            const rect = step.getBoundingClientRect();
-            const x = Math.random() * rect.width;
-            const y = Math.random() * rect.height;
-            
-            particle.style.left = `${x}px`;
-            particle.style.top = `${y}px`;
-            
-            // Animate particle
-            particle.animate([
-                { 
-                    opacity: 0, 
-                    transform: 'scale(0) translateY(0)' 
-                },
-                { 
-                    opacity: 1, 
-                    transform: 'scale(1.5) translateY(-30px)' 
-                },
-                { 
-                    opacity: 0, 
-                    transform: 'scale(0) translateY(-60px)' 
-                }
-            ], {
-                duration: 1500,
-                delay: i * 200,
-                easing: 'ease-out'
-            }).onfinish = () => particle.remove();
-        }
-    }
-
-    handleParallax() {
-        const shapes = document.querySelectorAll('.floating-shape');
-        shapes.forEach((shape, index) => {
-            const speed = 0.5 + (index * 0.1);
-            const yPos = -(window.pageYOffset * speed);
-            shape.style.transform = `translateY(${yPos}px) rotate(${yPos * 0.1}deg)`;
-        });
-    }
-
-    // Intersection Observer for Animations
-    setupIntersectionObserver() {
-        const options = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.handleElementInView(entry.target);
-                }
-            });
-        }, options);
-        
-        // Observe elements
-        this.serviceCards.forEach(card => observer.observe(card));
-        this.teamCards.forEach(card => observer.observe(card));
-        
-        // Observe section headers
-        document.querySelectorAll('.section-header').forEach(header => {
-            observer.observe(header);
-        });
-    }
-
-    handleElementInView(element) {
-        if (element.classList.contains('service-card')) {
-            this.animateServiceCard(element);
-        } else if (element.classList.contains('team-card')) {
-            this.animateTeamCard(element);
-        } else if (element.classList.contains('section-header')) {
-            this.animateSectionHeader(element);
-        }
-    }
-
-    animateServiceCard(card) {
-        const index = Array.from(this.serviceCards).indexOf(card);
+// WhatsApp Popup Functionality
+function initWhatsAppPopup() {
+    const whatsappPopup = document.getElementById('whatsappPopup');
+    
+    if (whatsappPopup) {
+        // Show WhatsApp popup after 3 seconds
         setTimeout(() => {
-            card.classList.add('animate');
-        }, index * 100);
-    }
-
-    animateTeamCard(card) {
-        const index = Array.from(this.teamCards).indexOf(card);
-        setTimeout(() => {
-            card.classList.add('animate');
-            this.addSparkleEffect(card);
-        }, index * 200);
-    }
-
-    animateSectionHeader(header) {
-        header.style.opacity = '0';
-        header.style.transform = 'translateY(30px)';
-        header.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            whatsappPopup.style.display = 'block';
+            whatsappPopup.style.animation = 'whatsappBounce 2s ease-in-out infinite';
+        }, 3000);
         
-        setTimeout(() => {
-            header.style.opacity = '1';
-            header.style.transform = 'translateY(0)';
-        }, 100);
-    }
-
-    // Special Effects
-    addSparkleEffect(element) {
-        const sparkles = 5;
-        for (let i = 0; i < sparkles; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.cssText = `
-                position: absolute;
-                width: 4px;
-                height: 4px;
-                background: #FFD700;
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 10;
-                opacity: 0;
-            `;
-            
-            element.appendChild(sparkle);
-            
-            const x = Math.random() * element.offsetWidth;
-            const y = Math.random() * element.offsetHeight;
-            
-            sparkle.style.left = `${x}px`;
-            sparkle.style.top = `${y}px`;
-            
-            sparkle.animate([
-                { opacity: 0, transform: 'scale(0) rotate(0deg)' },
-                { opacity: 1, transform: 'scale(1.5) rotate(180deg)' },
-                { opacity: 0, transform: 'scale(0) rotate(360deg)' }
-            ], {
-                duration: 1000,
-                delay: i * 200,
-                easing: 'ease-out'
-            }).onfinish = () => sparkle.remove();
-        }
-    }
-
-    // Navigation
-    handleNavClick(e) {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href');
-        if (!targetId) return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            const offsetTop = targetElement.offsetTop - 80;
-            
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
+        // Track WhatsApp clicks
+        const whatsappBtn = whatsappPopup.querySelector('.whatsapp-btn');
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', function() {
+                console.log('WhatsApp clicked - User redirected to WhatsApp');
             });
         }
-    }
-
-    // WhatsApp Popup - Fixed Implementation
-    showWhatsAppPopup() {
-        console.log('Showing WhatsApp popup'); // Debug log
-        
-        if (this.whatsappPopup) {
-            this.whatsappPopup.classList.add('show');
-            
-            // Add animation class for better visual feedback
-            this.whatsappPopup.style.transform = 'translateY(0) scale(1)';
-            this.whatsappPopup.style.opacity = '1';
-            
-            // Auto hide after 15 seconds
-            setTimeout(() => {
-                if (this.whatsappPopup && this.whatsappPopup.classList.contains('show')) {
-                    this.hideWhatsAppPopup();
-                }
-            }, 15000);
-        }
-    }
-
-    hideWhatsAppPopup() {
-        console.log('Hiding WhatsApp popup'); // Debug log
-        
-        if (this.whatsappPopup) {
-            this.whatsappPopup.classList.remove('show');
-            this.whatsappPopup.style.transform = 'translateY(20px) scale(0.9)';
-            this.whatsappPopup.style.opacity = '0';
-        }
-    }
-
-    // Utility Functions
-    handleResize() {
-        // Recalculate timeline height on resize
-        this.updateProcessTimeline();
-        this.handleParallax();
-    }
-
-    disableAnimations() {
-        const style = document.createElement('style');
-        style.textContent = `
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    initializeAnimations() {
-        // Setup enhanced interactions
-        this.initializeCustomCursor();
-        
-        // Add smooth scroll behavior
-        document.documentElement.style.scrollBehavior = 'smooth';
-    }
-
-    initializeCustomCursor() {
-        const interactiveElements = document.querySelectorAll('.btn, .service-card, .team-card, .process-step, .nav-link');
-        
-        interactiveElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                element.style.cursor = 'pointer';
-            });
-        });
-    }
-
-    // Performance optimization
-    throttle(func, wait) {
-        let timeout;
-        let previous = 0;
-        
-        return function executedFunction(...args) {
-            const now = Date.now();
-            const remaining = wait - (now - previous);
-            
-            if (remaining <= 0 || remaining > wait) {
-                if (timeout) {
-                    clearTimeout(timeout);
-                    timeout = null;
-                }
-                previous = now;
-                func.apply(this, args);
-            } else if (!timeout) {
-                timeout = setTimeout(() => {
-                    previous = Date.now();
-                    timeout = null;
-                    func.apply(this, args);
-                }, remaining);
-            }
-        };
     }
 }
 
-// Initialize the application when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Initializing SmartWorks App'); // Debug log
-    
-    // Add loading state
-    document.body.classList.add('loading');
-    
-    // Initialize app
-    window.smartWorksApp = new SmartWorksApp();
-    
-    // Remove loading state after initialization
-    setTimeout(() => {
-        document.body.classList.remove('loading');
-        console.log('SmartWorks App initialized'); // Debug log
-    }, 100);
-});
+// Additional utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
-// Handle page visibility changes
-document.addEventListener('visibilitychange', () => {
+// Window resize handler
+window.addEventListener('resize', debounce(function() {
+    // Handle any responsive adjustments if needed
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu && window.innerWidth > 768) {
+        mobileMenu.style.display = 'none';
+    }
+}, 250));
+
+// Page visibility change handler
+document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-        document.body.classList.add('paused');
+        document.title = 'Come back! - SmartWork Creation';
     } else {
-        document.body.classList.remove('paused');
+        document.title = 'SmartWork Creation And Solutions PVT LTD - Premium Digital Marketing Agency';
     }
 });
 
-// Error handling
-window.addEventListener('error', (e) => {
-    console.error('SmartWorks App Error:', e.error);
+// Performance optimization - Lazy load animations
+function lazyLoadAnimations() {
+    const animatedSvgs = document.querySelectorAll('.animated-svg');
+    
+    const svgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            } else {
+                entry.target.style.animationPlayState = 'paused';
+            }
+        });
+    });
+    
+    animatedSvgs.forEach(svg => {
+        svg.style.animationPlayState = 'paused';
+        svgObserver.observe(svg);
+    });
+}
+
+// Initialize lazy loading after page load
+window.addEventListener('load', function() {
+    lazyLoadAnimations();
 });
 
-// Export for testing purposes
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = SmartWorksApp;
-}
+// Console message for developers
+console.log('%c🚀 SmartWork Creation And Solutions PVT LTD', 'color: #21808D; font-size: 20px; font-weight: bold;');
+console.log('%cPremium Digital Marketing Solutions', 'color: #FFD700; font-size: 14px;');
+console.log('%cWebsite developed with advanced animations and modern web technologies', 'color: #626C71; font-size: 12px;');
+
+// Export functions for potential external use
+window.SmartWork = {
+    initializeApp,
+    initThemeToggle,
+    initMobileMenu,
+    initTypingAnimation,
+    initParticleSystem,
+    initScrollAnimations,
+    initContactForm,
+    initModals,
+    initSmoothScrolling,
+    initWhatsAppPopup
+};
